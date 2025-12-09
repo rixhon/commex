@@ -51,6 +51,7 @@ function DatePickerField({ id, placeholder, defaultValue, icon }: DatePickerFiel
 
   const [dateValue, setDateValue] = useState(convertToDateInput(defaultValue));
   const [displayValue, setDisplayValue] = useState(defaultValue || "");
+  const [isPickerOpen, setIsPickerOpen] = useState(false);
   const dateInputRef = useRef<HTMLInputElement>(null);
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,35 +62,49 @@ function DatePickerField({ id, placeholder, defaultValue, icon }: DatePickerFiel
     } else {
       setDisplayValue("");
     }
+    // Quando uma data é selecionada, o picker fecha automaticamente
+    setIsPickerOpen(false);
   };
 
   const handleIconClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     if (dateInputRef.current) {
-      // Tenta usar showPicker() se disponível (navegadores modernos)
-      try {
-        if (typeof (dateInputRef.current as any).showPicker === "function") {
-          // showPicker() pode retornar uma Promise, então tratamos como Promise
-          const pickerPromise = (dateInputRef.current as any).showPicker();
-          if (pickerPromise && typeof pickerPromise.catch === "function") {
-            pickerPromise.catch(() => {
-              // Se showPicker() falhar, usa fallback
-              dateInputRef.current?.focus();
-              dateInputRef.current?.click();
-            });
+      // Se o picker está aberto, fecha (blur)
+      if (isPickerOpen) {
+        dateInputRef.current.blur();
+        setIsPickerOpen(false);
+      } else {
+        // Se o picker está fechado, abre
+        setIsPickerOpen(true);
+        // Tenta usar showPicker() se disponível (navegadores modernos)
+        try {
+          if (typeof (dateInputRef.current as any).showPicker === "function") {
+            const pickerPromise = (dateInputRef.current as any).showPicker();
+            if (pickerPromise && typeof pickerPromise.catch === "function") {
+              pickerPromise.catch(() => {
+                // Se showPicker() falhar, usa fallback
+                dateInputRef.current?.focus();
+                dateInputRef.current?.click();
+              });
+            }
+          } else {
+            // Fallback: foca e clica no input para abrir o date picker
+            dateInputRef.current.focus();
+            dateInputRef.current.click();
           }
-        } else {
-          // Fallback: foca e clica no input para abrir o date picker
+        } catch (error) {
+          // Se showPicker() falhar, usa o fallback
           dateInputRef.current.focus();
           dateInputRef.current.click();
         }
-      } catch (error) {
-        // Se showPicker() falhar, usa o fallback
-        dateInputRef.current.focus();
-        dateInputRef.current.click();
       }
     }
+  };
+
+  // Detecta quando o picker fecha (quando o input perde o foco)
+  const handleBlur = () => {
+    setIsPickerOpen(false);
   };
 
   const handleDisplayClick = (e: React.MouseEvent) => {
@@ -106,6 +121,7 @@ function DatePickerField({ id, placeholder, defaultValue, icon }: DatePickerFiel
         type="date"
         value={dateValue}
         onChange={handleDateChange}
+        onBlur={handleBlur}
         style={{ position: "absolute", opacity: 0, pointerEvents: "none", width: 0, height: 0 }}
         tabIndex={-1}
       />

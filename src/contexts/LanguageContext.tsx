@@ -132,6 +132,10 @@ const translations: Translations = {
     "pt-BR": "Salvar",
     "en-US": "Save"
   },
+  "common.cancelar": {
+    "pt-BR": "Cancelar",
+    "en-US": "Cancel"
+  },
   "common.aprovar": {
     "pt-BR": "Aprovar",
     "en-US": "Approve"
@@ -228,6 +232,18 @@ const translations: Translations = {
   "page.cotacao": {
     "pt-BR": "Cotação",
     "en-US": "Quotation"
+  },
+  "page.cotacao-validacao-lista": {
+    "pt-BR": "Cotação Validação Lista",
+    "en-US": "Quotation Validation List"
+  },
+  "page.customer-service": {
+    "pt-BR": "Customer Service",
+    "en-US": "Customer Service"
+  },
+  "page.creco": {
+    "pt-BR": "CRECO",
+    "en-US": "CRECO"
   },
   "page.cotacao-pre": {
     "pt-BR": "Cotação Pré",
@@ -353,6 +369,10 @@ const translations: Translations = {
     "pt-BR": "Pendente de Correção",
     "en-US": "Pending Correction"
   },
+  "page.auditoria": {
+    "pt-BR": "Auditoria",
+    "en-US": "Audit"
+  },
   "page.licitacoes": {
     "pt-BR": "Licitações",
     "en-US": "Bids"
@@ -418,6 +438,18 @@ const translations: Translations = {
   "field.justificativa-placeholder": {
     "pt-BR": "Justificativa...",
     "en-US": "Justification..."
+  },
+  "field.data-hora-inicio-agendamento": {
+    "pt-BR": "Data e Hora de Início do Agendamento",
+    "en-US": "Appointment Start Date and Time"
+  },
+  "field.data-hora-termino": {
+    "pt-BR": "Data e Hora de Término",
+    "en-US": "End Date and Time"
+  },
+  "field.escolha-cor-personalizada": {
+    "pt-BR": "Escolha uma cor personalizada",
+    "en-US": "Choose a custom color"
   },
   "field.total": {
     "pt-BR": "Total",
@@ -978,6 +1010,62 @@ const translations: Translations = {
   "field.fechar-modal": {
     "pt-BR": "Fechar modal",
     "en-US": "Close modal"
+  },
+  "field.data-hora-inicio": {
+    "pt-BR": "DATA/HORA-INÍCIO",
+    "en-US": "START DATE/TIME"
+  },
+  "field.data-hora-fim": {
+    "pt-BR": "DATA/HORA-FIM",
+    "en-US": "END DATE/TIME"
+  },
+  "field.assessores": {
+    "pt-BR": "ASSESSORES",
+    "en-US": "ASSESSORS"
+  },
+  "field.operador-logistico": {
+    "pt-BR": "Operador Logístico",
+    "en-US": "Logistics Operator"
+  },
+  "field.autorizacoes": {
+    "pt-BR": "Autorizações",
+    "en-US": "Authorizations"
+  },
+  "field.aprovar-todos-produtos": {
+    "pt-BR": "APROVAR TODOS OS PRODUTOS",
+    "en-US": "APPROVE ALL PRODUCTS"
+  },
+  "field.produtos-utilizados": {
+    "pt-BR": "Produtos Utilizados",
+    "en-US": "Products Used"
+  },
+  "field.codigo": {
+    "pt-BR": "CÓDIGO",
+    "en-US": "CODE"
+  },
+  "field.produto": {
+    "pt-BR": "PRODUTO",
+    "en-US": "PRODUCT"
+  },
+  "field.lote": {
+    "pt-BR": "LOTE",
+    "en-US": "LOT"
+  },
+  "field.qtd": {
+    "pt-BR": "QTD.",
+    "en-US": "QTY."
+  },
+  "field.aprov": {
+    "pt-BR": "APROV.",
+    "en-US": "APPROV."
+  },
+  "field.reprov": {
+    "pt-BR": "REPROV.",
+    "en-US": "DISAPPROV."
+  },
+  "field.reversa": {
+    "pt-BR": "Reversa",
+    "en-US": "Reverse"
   }
 };
 

@@ -255,7 +255,7 @@ export function CriacaoProcedimentoLista({ onNavigateToCotacaoReprovada, onNavig
                         patient.id === "thiago-martins"
                           ? t("common.negociacao-reprovada")
                           : patient.id === "ana-paula"
-                          ? t("common.reprovada")
+                          ? t("common.cotacao-reprovada")
                           : patient.id === "pedro-henrique"
                           ? t("common.pedido-negociacao")
                           : patient.id === "gabriela-mendes"
@@ -293,7 +293,7 @@ export function CriacaoProcedimentoLista({ onNavigateToCotacaoReprovada, onNavig
                           : patient.id === "thiago-martins"
                           ? t("common.negociacao-reprovada")
                           : patient.id === "ana-paula"
-                          ? t("common.reprovada")
+                          ? t("common.cotacao-reprovada")
                           : patient.id === "pedro-henrique"
                           ? t("common.pedido-negociacao")
                           : patient.id === "gabriela-mendes"

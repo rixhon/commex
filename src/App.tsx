@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import {
   Bell,
   HelpCircle,
@@ -25,10 +25,14 @@ import { CriacaoProcedimento } from "./pages/CriacaoProcedimento";
 import { CriacaoProcedimentoLista } from "./pages/CriacaoProcedimentoLista";
 import { Cotacao } from "./pages/Cotacao";
 import { CotacaoValidacao } from "./pages/CotacaoValidacao";
+import { CotacaoValidacaoLista } from "./pages/CotacaoValidacaoLista";
+import { CotacaoCustomerService } from "./pages/CotacaoCustomerService";
+import { CotacaoCreco } from "./pages/CotacaoCreco";
 import { Pricing } from "./pages/Pricing";
 import { PricingLiberacao } from "./pages/PricingLiberacao";
 import { Agendamentos } from "./pages/Agendamentos";
 import { MapaCirurgico } from "./pages/MapaCirurgico";
+import { MapaCirurgicoAgenda } from "./pages/MapaCirurgicoAgenda";
 import { FolhaSala } from "./pages/FolhaSala";
 import { FolhaSalaMais } from "./pages/FolhaSalaMais";
 import { FolhaSalaConsignado } from "./pages/FolhaSalaConsignado";
@@ -45,6 +49,8 @@ import { PedidoNegociacao } from "./pages/PedidoNegociacao";
 import { NegociacaoEmAnalise } from "./pages/NegociacaoEmAnalise";
 import { Licitacoes } from "./pages/Licitacoes";
 import { Mobile } from "./pages/Mobile";
+import { PendenteAuditoria } from "./pages/PendenteAuditoria";
+import { Auditoria2 } from "./pages/Auditoria2";
 import { PagePlaceholder } from "./pages/PagePlaceholder";
 
 type MenuItem = {
@@ -93,17 +99,17 @@ export default function App() {
           {
             id: "cotacao-validacao",
             label: t("menu.cotacao-validacao"),
-            component: <CotacaoValidacao />
+            component: <CotacaoValidacaoLista onNavigateToValidacao={() => setActiveItemId("cotacao-validacao-detail")} />
           },
           {
             id: "cotacao-customer",
             label: t("menu.cotacao-customer"),
-            component: PAGE_PLACEHOLDER(t("menu.cotacao-customer"))
+            component: <CotacaoCustomerService />
           },
           {
             id: "cotacao-creco",
             label: t("menu.cotacao-creco"),
-            component: PAGE_PLACEHOLDER(t("menu.cotacao-creco"))
+            component: <CotacaoCreco />
           },
           {
             id: "pdf-cotacao",
@@ -135,7 +141,7 @@ export default function App() {
         id: "agendamentos",
         label: t("menu.agendamentos"),
         icon: <Calendar size={24} strokeWidth={1.75} />,
-        component: <Agendamentos />
+        component: <Agendamentos onNavigateToMapaCirurgicoAgenda={() => setActiveItemId("mapa-cirurgico-agenda")} />
       },
       {
         id: "mapa-cirurgico",
@@ -153,14 +159,7 @@ export default function App() {
         id: "auditoria",
         label: t("menu.auditoria"),
         icon: <Search size={24} strokeWidth={1.75} />,
-        children: [
-          {
-            id: "auditoria-folha",
-            label: t("menu.auditoria-folha"),
-            component: PAGE_PLACEHOLDER(t("menu.auditoria-folha"))
-          }
-        ],
-        component: PAGE_PLACEHOLDER(t("menu.auditoria"))
+        component: <PendenteAuditoria onNavigateToAuditoria2={() => setActiveItemId("auditoria2")} />
       },
       {
         id: "ordem-compra",
@@ -183,6 +182,27 @@ export default function App() {
     ],
     [t]
   );
+
+  // Auto-open groups when their children are active
+  useEffect(() => {
+    const newOpenGroups = new Set(openGroups);
+    menuItems.forEach((item) => {
+      if (item.children) {
+        const hasActiveChild = item.children.some(
+          (child) =>
+            activeItemId === child.id ||
+            (child.id === "cotacao-validacao" && activeItemId === "cotacao-validacao-detail")
+        );
+        if (hasActiveChild) {
+          newOpenGroups.add(item.id);
+        }
+      }
+    });
+    if (newOpenGroups.size !== openGroups.size || 
+        Array.from(newOpenGroups).some(id => !openGroups.has(id))) {
+      setOpenGroups(newOpenGroups);
+    }
+  }, [activeItemId, menuItems, openGroups]);
 
   const findActiveComponent = () => {
     // Debug: Log para identificar qual componente está sendo renderizado
@@ -288,6 +308,21 @@ export default function App() {
           onNavigateToNegociacao={() => setActiveItemId("pedido-negociacao")}
         />
       );
+    }
+
+    // Handle cotacao-validacao-detail which is not in the menu but accessible via navigation
+    if (activeItemId === "cotacao-validacao-detail") {
+      return <CotacaoValidacao onNavigateBack={() => setActiveItemId("cotacao-validacao")} />;
+    }
+
+    // Handle mapa-cirurgico-agenda which is not in the menu but accessible via navigation
+    if (activeItemId === "mapa-cirurgico-agenda") {
+      return <MapaCirurgicoAgenda />;
+    }
+
+    // Handle auditoria2 which is not in the menu but accessible via navigation
+    if (activeItemId === "auditoria2") {
+      return <Auditoria2 />;
     }
 
     for (const item of menuItems) {
@@ -465,7 +500,10 @@ export default function App() {
                 (item.id === "pricing" && activeItemId === "pricing-liberacao") ||
                 (item.id === "faturamento" && (activeItemId === "ordem-compra-anexar" || activeItemId === "faturamento-lista" || activeItemId === "liberacao-divergente" || activeItemId === "saldo-pendente" || activeItemId === "faturamento-cs")) ||
                 (item.id === "folha-sala" && (activeItemId === "folha-sala-mais" || activeItemId === "folha-sala-consignado")) ||
-                (item.id === "cotacao" && (activeItemId === "cotacao" || activeItemId === "cotacao-lista" || activeItemId === "criacao-procedimento-lista" || activeItemId === "cotacao-reprovada" || activeItemId === "negociacao-reprovada" || activeItemId === "pedido-negociacao" || activeItemId === "negociacao-em-analise"));
+                (item.id === "cotacao" && (activeItemId === "cotacao" || activeItemId === "cotacao-lista" || activeItemId === "criacao-procedimento-lista" || activeItemId === "cotacao-reprovada" || activeItemId === "negociacao-reprovada" || activeItemId === "pedido-negociacao" || activeItemId === "negociacao-em-analise" || activeItemId === "cotacao-validacao" || activeItemId === "cotacao-validacao-detail")) ||
+                (item.id === "cotacao-validacao" && (activeItemId === "cotacao-validacao" || activeItemId === "cotacao-validacao-detail")) ||
+                (item.id === "agendamentos" && activeItemId === "mapa-cirurgico-agenda") ||
+                (item.id === "auditoria" && activeItemId === "auditoria2");
               const isGroupOpen = openGroups.has(item.id);
               const hasChildren = item.children && item.children.length > 0;
 
@@ -522,7 +560,9 @@ export default function App() {
                   {hasChildren && isGroupOpen && sidebarExpanded && (
                     <ul className="mt-1 space-y-0.5 pl-6">
                       {item.children?.map((child) => {
-                        const isChildActive = activeItemId === child.id;
+                        const isChildActive = 
+                          activeItemId === child.id ||
+                          (child.id === "cotacao-validacao" && activeItemId === "cotacao-validacao-detail");
                         return (
                           <li key={child.id} className="w-full">
                             <button

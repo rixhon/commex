@@ -52,7 +52,11 @@ const currencyFormatter = new Intl.NumberFormat("pt-BR", {
 
 const formatCurrency = (value: number) => currencyFormatter.format(value);
 
-export function CotacaoValidacao() {
+type CotacaoValidacaoProps = {
+  onNavigateBack?: () => void;
+};
+
+export function CotacaoValidacao({ onNavigateBack }: CotacaoValidacaoProps) {
   const { t } = useLanguage();
   const [items, setItems] = useState<Item[]>(() =>
     initialItems.map((item) => ({ ...item }))
@@ -283,9 +287,10 @@ export function CotacaoValidacao() {
       <div className="flex flex-wrap justify-center gap-4 sm:justify-end">
         <button
           type="button"
+          onClick={onNavigateBack}
           className="w-full max-w-[200px] rounded-full bg-accent px-10 py-3 text-sm font-semibold uppercase tracking-[0.1em] text-white transition hover:bg-accent/90"
         >
-          Voltar
+          {t("common.voltar")}
         </button>
         <button
           type="button"

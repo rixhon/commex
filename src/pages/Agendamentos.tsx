@@ -31,7 +31,11 @@ const initialScheduled: PatientRow[] = [
 
 type TabKey = "pending" | "scheduled";
 
-export function Agendamentos() {
+type AgendamentosProps = {
+  onNavigateToMapaCirurgicoAgenda?: () => void;
+};
+
+export function Agendamentos({ onNavigateToMapaCirurgicoAgenda }: AgendamentosProps) {
   const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState<TabKey>("pending");
   const [search, setSearch] = useState("");
@@ -147,6 +151,11 @@ export function Agendamentos() {
               <div className="flex items-center justify-end gap-3 text-primary">
                 <button
                   type="button"
+                  onClick={() => {
+                    if (patient.id === "mariana-bastos" && onNavigateToMapaCirurgicoAgenda) {
+                      onNavigateToMapaCirurgicoAgenda();
+                    }
+                  }}
                   className="flex size-8 items-center justify-center rounded-full border border-primary transition hover:bg-primary/10"
                   aria-label={`Adicionar ${patient.name}`}
                 >
@@ -174,5 +183,3 @@ export function Agendamentos() {
     </section>
   );
 }
-
-
