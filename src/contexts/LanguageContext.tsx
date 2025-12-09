@@ -100,6 +100,30 @@ const translations: Translations = {
     "pt-BR": "Buscar",
     "en-US": "Search"
   },
+  "common.validacao-comercial": {
+    "pt-BR": "Validação Comercial",
+    "en-US": "Commercial Validation"
+  },
+  "common.cotacao-ganha": {
+    "pt-BR": "Cotação Ganha",
+    "en-US": "Quotation Won"
+  },
+  "common.cotacao-reprovada": {
+    "pt-BR": "Cotação Reprovada",
+    "en-US": "Quotation Rejected"
+  },
+  "common.negociacao": {
+    "pt-BR": "Negociação",
+    "en-US": "Negotiation"
+  },
+  "common.pedido-negociacao": {
+    "pt-BR": "Pedido de Negociação",
+    "en-US": "Negotiation Request"
+  },
+  "common.negociacao-em-analise": {
+    "pt-BR": "Negociação em Análise",
+    "en-US": "Negotiation Under Analysis"
+  },
   "common.salvar": {
     "pt-BR": "Salvar",
     "en-US": "Save"
@@ -180,6 +204,14 @@ const translations: Translations = {
   "page.reprovada": {
     "pt-BR": "Reprovada",
     "en-US": "Rejected"
+  },
+  "page.commex": {
+    "pt-BR": "COMMEX",
+    "en-US": "COMMEX"
+  },
+  "page.negociacao-em-analise": {
+    "pt-BR": "Negociação em Análise",
+    "en-US": "Negotiation Under Analysis"
   },
   "page.saldo-pendente": {
     "pt-BR": "Saldo Pendente",
@@ -370,6 +402,14 @@ const translations: Translations = {
   "field.comentario": {
     "pt-BR": "Comentário",
     "en-US": "Comment"
+  },
+  "field.justificativa": {
+    "pt-BR": "Justificativa",
+    "en-US": "Justification"
+  },
+  "field.justificativa-placeholder": {
+    "pt-BR": "Justificativa...",
+    "en-US": "Justification..."
   },
   "field.total": {
     "pt-BR": "Total",

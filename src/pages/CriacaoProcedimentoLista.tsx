@@ -65,9 +65,11 @@ type TabKey = "cotacao-autorizacao" | "pendente-agendamento";
 type CriacaoProcedimentoListaProps = {
   onNavigateToCotacaoReprovada?: () => void;
   onNavigateToNegociacaoReprovada?: () => void;
+  onNavigateToPedidoNegociacao?: () => void;
+  onNavigateToNegociacaoEmAnalise?: () => void;
 };
 
-export function CriacaoProcedimentoLista({ onNavigateToCotacaoReprovada, onNavigateToNegociacaoReprovada }: CriacaoProcedimentoListaProps) {
+export function CriacaoProcedimentoLista({ onNavigateToCotacaoReprovada, onNavigateToNegociacaoReprovada, onNavigateToPedidoNegociacao, onNavigateToNegociacaoEmAnalise }: CriacaoProcedimentoListaProps) {
   const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState<TabKey>("cotacao-autorizacao");
   const [search, setSearch] = useState("");
@@ -230,6 +232,10 @@ export function CriacaoProcedimentoLista({ onNavigateToCotacaoReprovada, onNavig
                           onNavigateToCotacaoReprovada();
                         } else if (patient.id === "thiago-martins" && onNavigateToNegociacaoReprovada) {
                           onNavigateToNegociacaoReprovada();
+                        } else if (patient.id === "pedro-henrique" && onNavigateToPedidoNegociacao) {
+                          onNavigateToPedidoNegociacao();
+                        } else if (patient.id === "gabriela-mendes" && onNavigateToNegociacaoEmAnalise) {
+                          onNavigateToNegociacaoEmAnalise();
                         } else {
                           handleAddClick();
                         }
@@ -238,6 +244,10 @@ export function CriacaoProcedimentoLista({ onNavigateToCotacaoReprovada, onNavig
                         "flex size-8 items-center justify-center rounded-full border transition",
                         patient.id === "thiago-martins" || patient.id === "ana-paula"
                           ? "border-red-500 text-red-500 hover:bg-red-500/10"
+                          : patient.id === "pedro-henrique"
+                          ? "border-orange-500 text-orange-500 hover:bg-orange-500/10"
+                          : patient.id === "gabriela-mendes"
+                          ? "border-purple-500 text-purple-500 hover:bg-purple-500/10"
                           : "border-primary text-primary hover:bg-primary/10"
                       )}
                       aria-label={`Adicionar ${patient.name}`}
@@ -246,6 +256,10 @@ export function CriacaoProcedimentoLista({ onNavigateToCotacaoReprovada, onNavig
                           ? t("common.negociacao-reprovada")
                           : patient.id === "ana-paula"
                           ? t("common.reprovada")
+                          : patient.id === "pedro-henrique"
+                          ? t("common.pedido-negociacao")
+                          : patient.id === "gabriela-mendes"
+                          ? t("common.negociacao-em-analise")
                           : undefined
                       }
                     >
@@ -266,6 +280,10 @@ export function CriacaoProcedimentoLista({ onNavigateToCotacaoReprovada, onNavig
                           ? "border-yellow-500 text-yellow-500 hover:bg-yellow-500/10"
                           : patient.id === "thiago-martins" || patient.id === "ana-paula"
                           ? "border-red-500 text-red-500 hover:bg-red-500/10"
+                          : patient.id === "pedro-henrique"
+                          ? "border-orange-500 text-orange-500 hover:bg-orange-500/10"
+                          : patient.id === "gabriela-mendes"
+                          ? "border-purple-500 text-purple-500 hover:bg-purple-500/10"
                           : "border-primary text-primary hover:bg-primary/10"
                       )}
                       aria-label={`Mais informações sobre ${patient.name}`}
@@ -276,6 +294,10 @@ export function CriacaoProcedimentoLista({ onNavigateToCotacaoReprovada, onNavig
                           ? t("common.negociacao-reprovada")
                           : patient.id === "ana-paula"
                           ? t("common.reprovada")
+                          : patient.id === "pedro-henrique"
+                          ? t("common.pedido-negociacao")
+                          : patient.id === "gabriela-mendes"
+                          ? t("common.negociacao-em-analise")
                           : undefined
                       }
                     >

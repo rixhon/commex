@@ -41,6 +41,8 @@ import { LiberacaoDivergente } from "./pages/LiberacaoDivergente";
 import { SaldoPendente } from "./pages/SaldoPendente";
 import { NegociacaoReprovada } from "./pages/NegociacaoReprovada";
 import { CotacaoReprovada } from "./pages/CotacaoReprovada";
+import { PedidoNegociacao } from "./pages/PedidoNegociacao";
+import { NegociacaoEmAnalise } from "./pages/NegociacaoEmAnalise";
 import { Licitacoes } from "./pages/Licitacoes";
 import { PagePlaceholder } from "./pages/PagePlaceholder";
 
@@ -82,6 +84,8 @@ export default function App() {
               <CriacaoProcedimentoLista
                 onNavigateToCotacaoReprovada={() => setActiveItemId("cotacao-reprovada")}
                 onNavigateToNegociacaoReprovada={() => setActiveItemId("negociacao-reprovada")}
+                onNavigateToPedidoNegociacao={() => setActiveItemId("pedido-negociacao")}
+                onNavigateToNegociacaoEmAnalise={() => setActiveItemId("negociacao-em-analise")}
               />
             )
           },
@@ -110,6 +114,7 @@ export default function App() {
           <CriacaoProcedimentoLista
             onNavigateToCotacaoReprovada={() => setActiveItemId("cotacao-reprovada")}
             onNavigateToNegociacaoReprovada={() => setActiveItemId("negociacao-reprovada")}
+            onNavigateToPedidoNegociacao={() => setActiveItemId("pedido-negociacao")}
           />
         )
       },
@@ -200,6 +205,7 @@ export default function App() {
         <CriacaoProcedimentoLista
           onNavigateToCotacaoReprovada={() => setActiveItemId("cotacao-reprovada")}
           onNavigateToNegociacaoReprovada={() => setActiveItemId("negociacao-reprovada")}
+          onNavigateToPedidoNegociacao={() => setActiveItemId("pedido-negociacao")}
         />
       );
     }
@@ -265,6 +271,28 @@ export default function App() {
     // Handle cotacao-reprovada which is not in the menu but accessible via navigation
     if (activeItemId === "cotacao-reprovada") {
       return <CotacaoReprovada onNavigateBack={() => setActiveItemId("cotacao-lista")} />;
+    }
+
+    // Handle pedido-negociacao which is not in the menu but accessible via navigation
+    if (activeItemId === "pedido-negociacao") {
+      return (
+        <PedidoNegociacao
+          onNavigateBack={() => setActiveItemId("cotacao-lista")}
+          onNavigateToValidacaoComercial={() => setActiveItemId("cotacao-validacao")}
+        />
+      );
+    }
+
+    // Handle negociacao-em-analise which is not in the menu but accessible via navigation
+    if (activeItemId === "negociacao-em-analise") {
+      return (
+        <NegociacaoEmAnalise
+          onNavigateBack={() => setActiveItemId("cotacao-lista")}
+          onNavigateToCotacaoGanha={() => setActiveItemId("cotacao-lista")}
+          onNavigateToCotacaoReprovada={() => setActiveItemId("cotacao-reprovada")}
+          onNavigateToNegociacao={() => setActiveItemId("pedido-negociacao")}
+        />
+      );
     }
 
     for (const item of menuItems) {
@@ -442,7 +470,7 @@ export default function App() {
                 (item.id === "pricing" && activeItemId === "pricing-liberacao") ||
                 (item.id === "faturamento" && (activeItemId === "ordem-compra-anexar" || activeItemId === "faturamento-lista" || activeItemId === "liberacao-divergente" || activeItemId === "saldo-pendente" || activeItemId === "faturamento-cs")) ||
                 (item.id === "folha-sala" && (activeItemId === "folha-sala-mais" || activeItemId === "folha-sala-consignado")) ||
-                (item.id === "cotacao" && (activeItemId === "cotacao" || activeItemId === "cotacao-lista" || activeItemId === "criacao-procedimento-lista" || activeItemId === "cotacao-reprovada" || activeItemId === "negociacao-reprovada"));
+                (item.id === "cotacao" && (activeItemId === "cotacao" || activeItemId === "cotacao-lista" || activeItemId === "criacao-procedimento-lista" || activeItemId === "cotacao-reprovada" || activeItemId === "negociacao-reprovada" || activeItemId === "pedido-negociacao" || activeItemId === "negociacao-em-analise"));
               const isGroupOpen = openGroups.has(item.id);
               const hasChildren = item.children && item.children.length > 0;
 
