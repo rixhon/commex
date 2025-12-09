@@ -62,7 +62,12 @@ const initialPatients: PatientRow[] = [
 
 type TabKey = "cotacao-autorizacao" | "pendente-agendamento";
 
-export function CriacaoProcedimentoLista() {
+type CriacaoProcedimentoListaProps = {
+  onNavigateToCotacaoReprovada?: () => void;
+  onNavigateToNegociacaoReprovada?: () => void;
+};
+
+export function CriacaoProcedimentoLista({ onNavigateToCotacaoReprovada, onNavigateToNegociacaoReprovada }: CriacaoProcedimentoListaProps) {
   const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState<TabKey>("cotacao-autorizacao");
   const [search, setSearch] = useState("");
@@ -211,13 +216,6 @@ export function CriacaoProcedimentoLista() {
               )}
             >
               <div className="flex items-center gap-3">
-                {patient.hasAlert && (
-                  <AlertCircle
-                    size={18}
-                    className="text-red-500 flex-shrink-0"
-                    aria-label="Alerta"
-                  />
-                )}
                 <span className="font-medium text-[#4f4f4f]">
                   {patient.name}
                 </span>
@@ -227,9 +225,29 @@ export function CriacaoProcedimentoLista() {
                   <>
                     <button
                       type="button"
-                      onClick={handleAddClick}
-                      className="flex size-8 items-center justify-center rounded-full border border-primary transition hover:bg-primary/10"
+                      onClick={() => {
+                        if (patient.id === "ana-paula" && onNavigateToCotacaoReprovada) {
+                          onNavigateToCotacaoReprovada();
+                        } else if (patient.id === "thiago-martins" && onNavigateToNegociacaoReprovada) {
+                          onNavigateToNegociacaoReprovada();
+                        } else {
+                          handleAddClick();
+                        }
+                      }}
+                      className={clsx(
+                        "flex size-8 items-center justify-center rounded-full border transition",
+                        patient.id === "thiago-martins" || patient.id === "ana-paula"
+                          ? "border-red-500 text-red-500 hover:bg-red-500/10"
+                          : "border-primary text-primary hover:bg-primary/10"
+                      )}
                       aria-label={`Adicionar ${patient.name}`}
+                      title={
+                        patient.id === "thiago-martins"
+                          ? t("common.negociacao-reprovada")
+                          : patient.id === "ana-paula"
+                          ? t("common.reprovada")
+                          : undefined
+                      }
                     >
                       <Plus size={18} />
                     </button>
@@ -242,8 +260,24 @@ export function CriacaoProcedimentoLista() {
                     </button>
                     <button
                       type="button"
-                      className="flex size-8 items-center justify-center rounded-full border border-primary transition hover:bg-primary/10"
+                      className={clsx(
+                        "flex size-8 items-center justify-center rounded-full border transition",
+                        patient.id === "lucas-ferreira"
+                          ? "border-yellow-500 text-yellow-500 hover:bg-yellow-500/10"
+                          : patient.id === "thiago-martins" || patient.id === "ana-paula"
+                          ? "border-red-500 text-red-500 hover:bg-red-500/10"
+                          : "border-primary text-primary hover:bg-primary/10"
+                      )}
                       aria-label={`Mais informações sobre ${patient.name}`}
+                      title={
+                        patient.id === "lucas-ferreira"
+                          ? t("common.cotacao-em-analise")
+                          : patient.id === "thiago-martins"
+                          ? t("common.negociacao-reprovada")
+                          : patient.id === "ana-paula"
+                          ? t("common.reprovada")
+                          : undefined
+                      }
                     >
                       <Info size={18} />
                     </button>
@@ -252,8 +286,14 @@ export function CriacaoProcedimentoLista() {
                   <>
                     <button
                       type="button"
-                      className="flex size-8 items-center justify-center rounded-full border border-primary transition hover:bg-primary/10"
+                      className={clsx(
+                        "flex size-8 items-center justify-center rounded-full border transition",
+                        patient.id === "lucas-ferreira"
+                          ? "border-yellow-500 text-yellow-500 hover:bg-yellow-500/10"
+                          : "border-primary text-primary hover:bg-primary/10"
+                      )}
                       aria-label={`Buscar ${patient.name}`}
+                      title={patient.id === "lucas-ferreira" ? t("common.cotacao-em-analise") : undefined}
                     >
                       <Search size={18} />
                     </button>
@@ -266,8 +306,22 @@ export function CriacaoProcedimentoLista() {
                     </button>
                     <button
                       type="button"
-                      className="flex size-8 items-center justify-center rounded-full border border-primary transition hover:bg-primary/10"
+                      className={clsx(
+                        "flex size-8 items-center justify-center rounded-full border transition",
+                        patient.id === "lucas-ferreira"
+                          ? "border-yellow-500 text-yellow-500 hover:bg-yellow-500/10"
+                          : patient.id === "thiago-martins"
+                          ? "border-red-500 text-red-500 hover:bg-red-500/10"
+                          : "border-primary text-primary hover:bg-primary/10"
+                      )}
                       aria-label={`Mais informações sobre ${patient.name}`}
+                      title={
+                        patient.id === "lucas-ferreira"
+                          ? t("common.cotacao-em-analise")
+                          : patient.id === "thiago-martins"
+                          ? t("common.negociacao-reprovada")
+                          : undefined
+                      }
                     >
                       <Info size={18} />
                     </button>

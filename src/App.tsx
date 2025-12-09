@@ -39,6 +39,8 @@ import { FaturamentoLista } from "./pages/FaturamentoLista";
 import { FaturamentoCS } from "./pages/FaturamentoCS";
 import { LiberacaoDivergente } from "./pages/LiberacaoDivergente";
 import { SaldoPendente } from "./pages/SaldoPendente";
+import { NegociacaoReprovada } from "./pages/NegociacaoReprovada";
+import { CotacaoReprovada } from "./pages/CotacaoReprovada";
 import { Licitacoes } from "./pages/Licitacoes";
 import { PagePlaceholder } from "./pages/PagePlaceholder";
 
@@ -70,9 +72,19 @@ export default function App() {
       },
       {
         id: "cotacao",
-        label: t("menu.cotacao"),
+        label: t("menu.commex"),
         icon: <FileText size={24} strokeWidth={1.75} />,
         children: [
+          {
+            id: "cotacao-lista",
+            label: t("menu.cotacao"),
+            component: (
+              <CriacaoProcedimentoLista
+                onNavigateToCotacaoReprovada={() => setActiveItemId("cotacao-reprovada")}
+                onNavigateToNegociacaoReprovada={() => setActiveItemId("negociacao-reprovada")}
+              />
+            )
+          },
           {
             id: "cotacao-validacao",
             label: t("menu.cotacao-validacao"),
@@ -87,9 +99,19 @@ export default function App() {
             id: "cotacao-creco",
             label: t("menu.cotacao-creco"),
             component: PAGE_PLACEHOLDER(t("menu.cotacao-creco"))
+          },
+          {
+            id: "pdf-cotacao",
+            label: t("menu.pdf-cotacao"),
+            component: <Cotacao />
           }
         ],
-        component: <Cotacao />
+        component: (
+          <CriacaoProcedimentoLista
+            onNavigateToCotacaoReprovada={() => setActiveItemId("cotacao-reprovada")}
+            onNavigateToNegociacaoReprovada={() => setActiveItemId("negociacao-reprovada")}
+          />
+        )
       },
       {
         id: "pricing",
@@ -174,7 +196,12 @@ export default function App() {
 
     // Handle criacao-procedimento-lista which is not in the menu but accessible via navigation
     if (activeItemId === "criacao-procedimento-lista") {
-      return <CriacaoProcedimentoLista />;
+      return (
+        <CriacaoProcedimentoLista
+          onNavigateToCotacaoReprovada={() => setActiveItemId("cotacao-reprovada")}
+          onNavigateToNegociacaoReprovada={() => setActiveItemId("negociacao-reprovada")}
+        />
+      );
     }
 
     // Handle ordem-compra-anexar which is not in the menu but accessible via navigation
@@ -228,6 +255,16 @@ export default function App() {
     // Handle faturamento-cs which is not in the menu but accessible via navigation
     if (activeItemId === "faturamento-cs") {
       return <FaturamentoCS onNavigateBack={() => setActiveItemId("faturamento")} />;
+    }
+
+    // Handle negociacao-reprovada which is not in the menu but accessible via navigation
+    if (activeItemId === "negociacao-reprovada") {
+      return <NegociacaoReprovada onNavigateBack={() => setActiveItemId("cotacao-lista")} />;
+    }
+
+    // Handle cotacao-reprovada which is not in the menu but accessible via navigation
+    if (activeItemId === "cotacao-reprovada") {
+      return <CotacaoReprovada onNavigateBack={() => setActiveItemId("cotacao-lista")} />;
     }
 
     for (const item of menuItems) {
@@ -405,7 +442,7 @@ export default function App() {
                 (item.id === "pricing" && activeItemId === "pricing-liberacao") ||
                 (item.id === "faturamento" && (activeItemId === "ordem-compra-anexar" || activeItemId === "faturamento-lista" || activeItemId === "liberacao-divergente" || activeItemId === "saldo-pendente" || activeItemId === "faturamento-cs")) ||
                 (item.id === "folha-sala" && (activeItemId === "folha-sala-mais" || activeItemId === "folha-sala-consignado")) ||
-                (item.id === "cotacao" && (activeItemId === "cotacao" || activeItemId === "criacao-procedimento-lista"));
+                (item.id === "cotacao" && (activeItemId === "cotacao" || activeItemId === "cotacao-lista" || activeItemId === "criacao-procedimento-lista" || activeItemId === "cotacao-reprovada" || activeItemId === "negociacao-reprovada"));
               const isGroupOpen = openGroups.has(item.id);
               const hasChildren = item.children && item.children.length > 0;
 

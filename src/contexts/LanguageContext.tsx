@@ -15,6 +15,10 @@ const translations: Translations = {
     "pt-BR": "Criação Procedimento",
     "en-US": "Procedure Creation"
   },
+  "menu.commex": {
+    "pt-BR": "Commex",
+    "en-US": "Commex"
+  },
   "menu.cotacao": {
     "pt-BR": "Cotação",
     "en-US": "Quotation"
@@ -30,6 +34,10 @@ const translations: Translations = {
   "menu.cotacao-creco": {
     "pt-BR": "CRECO",
     "en-US": "CRECO"
+  },
+  "menu.pdf-cotacao": {
+    "pt-BR": "PDF Cotação",
+    "en-US": "PDF Quotation"
   },
   "menu.pricing": {
     "pt-BR": "Pricing",
@@ -84,6 +92,14 @@ const translations: Translations = {
     "pt-BR": "Enviar",
     "en-US": "Send"
   },
+  "common.finalizar": {
+    "pt-BR": "Finalizar",
+    "en-US": "Finalize"
+  },
+  "common.buscar": {
+    "pt-BR": "Buscar",
+    "en-US": "Search"
+  },
   "common.salvar": {
     "pt-BR": "Salvar",
     "en-US": "Save"
@@ -120,6 +136,18 @@ const translations: Translations = {
     "pt-BR": "Ações",
     "en-US": "Actions"
   },
+  "common.cotacao-em-analise": {
+    "pt-BR": "Cotação em análise",
+    "en-US": "Quotation under analysis"
+  },
+  "common.negociacao-reprovada": {
+    "pt-BR": "Negociação Reprovada",
+    "en-US": "Negotiation Rejected"
+  },
+  "common.reprovada": {
+    "pt-BR": "Reprovada",
+    "en-US": "Rejected"
+  },
   "common.status": {
     "pt-BR": "Status",
     "en-US": "Status"
@@ -144,6 +172,14 @@ const translations: Translations = {
   "page.liberacao-divergente": {
     "pt-BR": "Liberação Divergente",
     "en-US": "Divergent Release"
+  },
+  "page.negociacao": {
+    "pt-BR": "Negociação",
+    "en-US": "Negotiation"
+  },
+  "page.reprovada": {
+    "pt-BR": "Reprovada",
+    "en-US": "Rejected"
   },
   "page.saldo-pendente": {
     "pt-BR": "Saldo Pendente",
