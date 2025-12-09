@@ -75,10 +75,6 @@ const translations: Translations = {
     "pt-BR": "INB",
     "en-US": "INB"
   },
-  "menu.teste": {
-    "pt-BR": "Teste",
-    "en-US": "Test"
-  },
   // Common
   "common.voltar": {
     "pt-BR": "Voltar",
@@ -176,10 +172,6 @@ const translations: Translations = {
   "page.faturamento-cs": {
     "pt-BR": "Faturamento | CS",
     "en-US": "Billing | CS"
-  },
-  "page.teste": {
-    "pt-BR": "Teste",
-    "en-US": "Test"
   },
   "page.agendamentos": {
     "pt-BR": "Agendamentos",

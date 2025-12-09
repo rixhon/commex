@@ -40,7 +40,6 @@ import { FaturamentoCS } from "./pages/FaturamentoCS";
 import { LiberacaoDivergente } from "./pages/LiberacaoDivergente";
 import { SaldoPendente } from "./pages/SaldoPendente";
 import { Licitacoes } from "./pages/Licitacoes";
-import { Teste } from "./pages/Teste";
 import { PagePlaceholder } from "./pages/PagePlaceholder";
 
 type MenuItem = {
@@ -158,12 +157,6 @@ export default function App() {
         label: t("menu.inb"),
         icon: <ClipboardCheck size={24} strokeWidth={1.75} />,
         component: PAGE_PLACEHOLDER(t("menu.inb"))
-      },
-      {
-        id: "teste",
-        label: t("menu.teste"),
-        icon: <FileText size={24} strokeWidth={1.75} />,
-        component: <Teste />
       }
     ],
     [t]
