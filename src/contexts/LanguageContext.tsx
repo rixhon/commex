@@ -79,6 +79,10 @@ const translations: Translations = {
     "pt-BR": "Faturamento",
     "en-US": "Billing"
   },
+  "menu.mobile": {
+    "pt-BR": "Mobile",
+    "en-US": "Mobile"
+  },
   "menu.inb": {
     "pt-BR": "INB",
     "en-US": "INB"
@@ -216,6 +220,10 @@ const translations: Translations = {
   "page.saldo-pendente": {
     "pt-BR": "Saldo Pendente",
     "en-US": "Pending Balance"
+  },
+  "page.mobile": {
+    "pt-BR": "Mobile",
+    "en-US": "Mobile"
   },
   "page.cotacao": {
     "pt-BR": "Cotação",

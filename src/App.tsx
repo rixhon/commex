@@ -44,6 +44,7 @@ import { CotacaoReprovada } from "./pages/CotacaoReprovada";
 import { PedidoNegociacao } from "./pages/PedidoNegociacao";
 import { NegociacaoEmAnalise } from "./pages/NegociacaoEmAnalise";
 import { Licitacoes } from "./pages/Licitacoes";
+import { Mobile } from "./pages/Mobile";
 import { PagePlaceholder } from "./pages/PagePlaceholder";
 
 type MenuItem = {
@@ -131,12 +132,6 @@ export default function App() {
         component: <Licitacoes />
       },
       {
-        id: "faturamento-servico",
-        label: t("menu.faturamento-servico"),
-        icon: <CalendarCheck size={24} strokeWidth={1.75} />,
-        component: PAGE_PLACEHOLDER(t("menu.faturamento-servico"))
-      },
-      {
         id: "agendamentos",
         label: t("menu.agendamentos"),
         icon: <Calendar size={24} strokeWidth={1.75} />,
@@ -180,10 +175,10 @@ export default function App() {
         component: <Faturamento />
       },
       {
-        id: "inb",
-        label: t("menu.inb"),
-        icon: <ClipboardCheck size={24} strokeWidth={1.75} />,
-        component: PAGE_PLACEHOLDER(t("menu.inb"))
+        id: "mobile",
+        label: t("menu.mobile"),
+        icon: <FileText size={24} strokeWidth={1.75} />,
+        component: <Mobile />
       }
     ],
     [t]
