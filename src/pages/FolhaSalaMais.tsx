@@ -2,6 +2,7 @@ import { ChevronDown, Plus } from "lucide-react";
 import clsx from "clsx";
 import { useState } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
+import { AnexarNFModal } from "../components/AnexarNFModal";
 
 type TabType = "consignado" | "industria" | "operador-logistico" | "servicos";
 
@@ -17,6 +18,7 @@ export function FolhaSalaMais({ onNavigateBack, onNavigateToConsignado }: FolhaS
   const [selectedIndustry, setSelectedIndustry] = useState("Abbott");
   const [idgen, setIdgen] = useState("");
   const [comments, setComments] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const tabCounts = {
     consignado: 0,
@@ -211,9 +213,7 @@ export function FolhaSalaMais({ onNavigateBack, onNavigateToConsignado }: FolhaS
           <button
             type="button"
             onClick={() => {
-              if (selectedTab === "consignado") {
-                onNavigateToConsignado?.();
-              }
+              setIsModalOpen(true);
             }}
             className="rounded-full bg-primary px-8 py-3 text-sm font-semibold uppercase tracking-[0.08em] text-white transition hover:bg-primaryHover"
           >
@@ -241,6 +241,17 @@ export function FolhaSalaMais({ onNavigateBack, onNavigateToConsignado }: FolhaS
           </button>
         </div>
       </div>
+
+      {isModalOpen && (
+        <AnexarNFModal
+          open={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSubmit={(data) => {
+            console.log("Modal submitted with data:", data);
+            setIsModalOpen(false);
+          }}
+        />
+      )}
     </section>
   );
 }

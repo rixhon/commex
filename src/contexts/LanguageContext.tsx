@@ -634,6 +634,10 @@ const translations: Translations = {
     "pt-BR": "Negativa CRECO",
     "en-US": "CRECO Refusal"
   },
+  "modal.anexar-nota-fiscal": {
+    "pt-BR": "Anexar Nota Fiscal",
+    "en-US": "Attach Invoice"
+  },
   // Additional buttons
   "button.reprovar": {
     "pt-BR": "Reprovar",
